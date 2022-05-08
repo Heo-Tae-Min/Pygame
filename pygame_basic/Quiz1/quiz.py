@@ -1,5 +1,14 @@
 import pygame
+import os
 from random import *
+
+def resource_path(relative_path):
+    try:
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
 
 pygame.init() # 초기화 (반드시 필요)
 
@@ -15,18 +24,19 @@ pygame.display.set_caption("똥 피하기 게임") # 게임 이름
 clock = pygame.time.Clock()
 
 # 1. 사용자 게임 초기화 (배경화면, 좌표, 속도, 폰트 등)
+current_path = os.path.dirname(__file__) # 현재 파일의 위치 반환
 # 배경화면
-background = pygame.image.load("C:\\Users\\Taemin\\Desktop\\Python Workspace\\Practical\\pygame_basic\\Quiz1\\background.png")
+background = pygame.image.load(os.path.join(current_path, "background.png"))
 
 # 똥, 캐릭터
-poop = pygame.image.load("C:\\Users\\Taemin\\Desktop\\Python Workspace\\Practical\\pygame_basic\\Quiz1\\poop.png")
+poop = pygame.image.load(os.path.join(current_path, "poop.png"))
 poop_size = poop.get_rect().size
 poop_width = poop_size[0]
 poop_height = poop_size[1]
 poop_x_pos = randint(0,screen_width - poop_width)
 poop_y_pos = 0
 
-character = pygame.image.load("C:\\Users\\Taemin\\Desktop\\Python Workspace\\Practical\\pygame_basic\\Quiz1\\character.png")
+character = pygame.image.load(os.path.join(current_path, "character.png"))
 character_size = character.get_rect().size
 character_width = character_size[0]
 character_height = character_size[1]
